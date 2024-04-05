@@ -1,0 +1,7 @@
+{
+  "name": "get-a-diet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
