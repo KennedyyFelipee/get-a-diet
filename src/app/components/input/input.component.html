@@ -1,0 +1,16 @@
+<ng-template [ngIf]="iconPath" [ngIfElse]="SimpleInput">
+  <div class="wrapper">
+    <ion-icon class="icon" slot="start" src="{{iconPath}}" alt="Icone" />
+    <ion-item>
+      <ion-label position="floating" for="">{{label}}</ion-label>
+      <ion-input type="{{type}}" />
+    </ion-item>
+  </div>
+</ng-template>
+
+<ng-template #SimpleInput>
+  <ion-item>
+    <ion-label position="floating" for="">{{label}}</ion-label>
+    <ion-input type="{{type}}" />
+  </ion-item>
+</ng-template>
