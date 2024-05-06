@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-type InputTypes = 'password' | 'text' | 'email'
+type InputTypes = 'password' | 'text' | 'email' | 'number'
 
 @Component({
   selector: 'app-input',
@@ -13,7 +13,4 @@ export class InputComponent {
   @Input() iconPath: String = ''
 
   constructor() { }
-
-
-
 }
