@@ -1,27 +1,38 @@
-#container {
-  text-align: center;
+#header {
+  width: 100%;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+  padding: 1rem;
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+  ion-title {
+    color: var(--black);
+    font-weight: 400;
+  }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
-  color: #8c8c8c;
+    #days-in-offensive {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
 
-  margin: 0;
-}
+      border-radius: 8px;
+      background-color: var(--dark-green);
 
-#container a {
-  text-decoration: none;
+      ion-icon {
+        font-size: 24px;
+      }
+
+      span {
+        font-size: 24px;
+        color: var(--white)
+      }
+    }
+
+    ion-icon {
+      font-size: 48px;
+    }
+  }
 }

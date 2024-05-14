@@ -1,23 +1,16 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <section id="header">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large" slot="start">Bom dia, Fulano</ion-title>
+
+      <div slot="end">
+        <div id="days-in-offensive">
+          <ion-icon src="assets/icons/offensive-days-fire.svg"></ion-icon>
+          <span>12</span>
+        </div>
+        <ion-icon src="assets/icons/user-circle.svg" slot="end"></ion-icon>
+      </div>
     </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer"
-        href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-
-  <app-navbar></app-navbar>
+  </section>
 </ion-content>
+<app-navbar></app-navbar>
