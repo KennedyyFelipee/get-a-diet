@@ -25,10 +25,20 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+@import "./theme/fonts.scss";
+
+:root {
+  --dark-green: #0F482F;
+  --light-green: #779E39;
+  --black: #000;
+  --white: #fff;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Roboto;
 }
 
 input[type=number]::-webkit-inner-spin-button,
