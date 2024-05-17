@@ -6,6 +6,9 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
+import { MealAccordionComponent } from 'src/app/components/accordion/meal-accordion/meal-accordion.component';
+import { AccordionItemComponent } from 'src/app/components/accordion/accordion-item/accordion-item.component';
+
 
 
 @NgModule({
@@ -16,6 +19,6 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
     HomePageRoutingModule,
 
   ],
-  declarations: [HomePage, NavbarComponent]
+  declarations: [HomePage, NavbarComponent, MealAccordionComponent, AccordionItemComponent,]
 })
 export class HomePageModule { }
