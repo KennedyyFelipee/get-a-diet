@@ -9,6 +9,7 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { MealAccordionComponent } from 'src/app/components/accordion/meal-accordion/meal-accordion.component';
 import { AccordionItemComponent } from 'src/app/components/accordion/accordion-item/accordion-item.component';
 
+import { SharedComponentModule } from 'src/app/shared/shared-component/shared-component.module';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { AccordionItemComponent } from 'src/app/components/accordion/accordion-i
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-
+    SharedComponentModule,
   ],
   declarations: [HomePage, NavbarComponent, MealAccordionComponent, AccordionItemComponent,]
 })
