@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -12,14 +12,13 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'two-factor',
-    loadChildren: () => import('./pages/two-factor/two-factor.module').then( m => m.TwoFactorPageModule)
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
   {
-    path: 'alter-password',
-    loadChildren: () => import('./pages/alter-password/alter-password.module').then( m => m.AlterPasswordPageModule)
+    path: 'setting',
+    loadChildren: () => import('./pages/setting/setting.module').then( m => m.SettingPageModule)
   },
-
 ];
 
 @NgModule({

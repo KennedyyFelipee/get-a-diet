@@ -1,0 +1,22 @@
+<ion-content [fullscreen]="true">
+  <section id="header">
+    <ion-toolbar>
+      <ion-title size="large" slot="start">{{greeting}}, {{userName}}</ion-title>
+
+      <div slot="end">
+        <div id="days-in-offensive">
+          <ion-icon src="assets/icons/offensive-days-fire.svg"></ion-icon>
+          <span>12</span>
+        </div>
+        <ion-icon src="assets/icons/user-circle.svg" slot="end"></ion-icon>
+      </div>
+    </ion-toolbar>
+  </section>
+
+  <section id="diet">
+    <ion-title class="title">Refeições</ion-title>
+
+    <app-meal-accordion></app-meal-accordion>
+  </section>
+</ion-content>
+<app-navbar></app-navbar>
