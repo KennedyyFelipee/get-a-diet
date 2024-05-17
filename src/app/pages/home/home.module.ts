@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { MealAccordionComponent } from 'src/app/components/accordion/meal-accordion/meal-accordion.component';
 import { AccordionItemComponent } from 'src/app/components/accordion/accordion-item/accordion-item.component';
 
@@ -20,6 +19,6 @@ import { SharedComponentModule } from 'src/app/shared/shared-component/shared-co
     HomePageRoutingModule,
     SharedComponentModule,
   ],
-  declarations: [HomePage, NavbarComponent, MealAccordionComponent, AccordionItemComponent,]
+  declarations: [HomePage, MealAccordionComponent, AccordionItemComponent,]
 })
 export class HomePageModule { }

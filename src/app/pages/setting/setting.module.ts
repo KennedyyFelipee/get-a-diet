@@ -19,4 +19,4 @@ import { SharedComponentModule } from 'src/app/shared/shared-component/shared-co
   ],
   declarations: [SettingPage]
 })
-export class SettingPageModule {}
+export class SettingPageModule { }
