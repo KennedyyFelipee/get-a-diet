@@ -1,0 +1,49 @@
+ion-content.background {
+  --background: url(../../../assets/svg/bg-login-light.svg) 100% 100% no-repeat;
+}
+
+/* card */
+ion-card {
+  padding: 20% 5% 20% 5%;
+  margin: 0 10% 0 10%;
+  box-shadow: 0px 0px 10px 0px #00000080;
+}
+
+#card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* caixas de texto */
+#divInputs {
+  margin: 10% 0 10% 0;
+}
+
+/* campos de ação */
+
+#divAlterarSenha {
+  display: flex;
+  justify-content: end;
+  margin: 0 0 10% 0;
+}
+
+
+#divCadastrar {
+  text-align: center;
+  margin: 15% 0 0 0;
+}
+
+#txtAlterarSenha {
+  text-align: end;
+}
+
+/* botão */
+
+ion-button {
+  --background: #0f482f;
+  --background-activated: #00875f;
+  --color: rgb(255, 255, 255);
+  --font-weight: bold;
+}
