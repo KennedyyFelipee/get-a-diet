@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import axios from 'axios';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
   public greeting!: String
-  constructor() { }
+  public userName!: String
+
+  private apiUrl: string = 'https://api-get-a-diet-production.up.railway.app'
+
+  constructor(private cookies: CookieService) { }
 
   generateGreeting() {
     const timeOfDay = new Date().getHours()
@@ -21,8 +27,39 @@ export class HomePage implements OnInit {
     }
   }
 
+  async fetchData() {
+    const loginInfo = {
+      "email": "johndoe@example4.com",
+      "password": "123456"
+    }
+
+    const authResponse = await axios.post(`${this.apiUrl}/sessions`, loginInfo)
+
+    const { token } = authResponse.data
+
+    this.cookies.set('access-token', token)
+
+    const userDataResponse = await axios.get(`${this.apiUrl}/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return userDataResponse.data.user
+
+
+  }
+
   ngOnInit(): void {
     this.greeting = this.generateGreeting()
+
+    this.fetchData().then(userDataResponse => {
+      const userNameFormatted = userDataResponse.name.split(" ")[0]
+      this.userName = userNameFormatted
+    }
+    )
+
+
   }
 
 }
