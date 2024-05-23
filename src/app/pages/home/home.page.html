@@ -1,12 +1,12 @@
 <ion-content [fullscreen]="true">
   <section id="header">
     <ion-toolbar>
-      <ion-title size="large" slot="start">{{greeting}}, {{userName}}</ion-title>
+      <ion-title size="large" slot="start">{{greeting}}, {{userNameFormatted}}</ion-title>
 
       <div slot="end">
         <div id="days-in-offensive">
           <ion-icon src="assets/icons/offensive-days-fire.svg"></ion-icon>
-          <span>12</span>
+          <span>{{days_in_offensive}}</span>
         </div>
         <ion-icon src="assets/icons/user-circle.svg" slot="end"></ion-icon>
       </div>
