@@ -1,29 +1,26 @@
 <ion-accordion class="meal">
   <ion-item class="meal-header" slot="header">
     <ion-icon class="icon" src="assets/icons/cutlery.svg"></ion-icon>
-    <ion-label>Almoço</ion-label>
+    <ion-label>{{meal.title}}</ion-label>
     <ion-icon class="ion-accordion-toggle-icon" src="assets/icons/chevron-down.svg"></ion-icon>
   </ion-item>
-  <div class="meal-content" slot="content">
+  <div class="meal-content" *ngFor="let mealItem of meal.items" slot="content">
     <ion-item class="meal-item">
       <div class="quantity">
-        <span>100</span>
-        <span>G</span>
-      </div>
-
-      <p class="item">Banana</p>
-    </ion-item>
-
-    <ion-item class="meal-item">
-      <div class="quantity">
-        <span>3</span>
-        <span>UND</span>
+        <span>{{mealItem.quantity}}</span>
+        <span>{{mealItem.unit}}</span>
       </div>
 
       <div class="content">
-        <p class="item">Pão</p>
-        <span class="description">Pão de forma ou francês.</span>
+        <p class="item">{{mealItem.name}}</p>
+        <span class="description">{{mealItem.description}}</span>
       </div>
     </ion-item>
   </div>
+
+  <ion-button class="confirm-button" slot="content" (click)="markAsCompleted(meal.title)">
+    <ion-icon src="assets/icons/check.svg" />
+    {{meal.completed ? "Concluida" : "Marcar como concluida"}}
+  </ion-button>
+
 </ion-accordion>

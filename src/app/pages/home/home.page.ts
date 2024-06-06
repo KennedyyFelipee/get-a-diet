@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/@types/index.';
 
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,12 +9,17 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  public greeting!: String
+  private user!: User | null
   public userNameFormatted: string = ""
   public days_in_offensive: number = 0
+  public orientations: string[] | null = null
+  public hasDiet: boolean = false
+
+  public greeting!: String
+  public loading: boolean = true
 
 
-  constructor(private AuthService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   generateGreeting() {
     const timeOfDay = new Date().getHours()
@@ -27,27 +33,30 @@ export class HomePage implements OnInit {
     }
   }
 
-  async fetchData() {
-    const loginInfo = {
-      "email": "johndoe@example5.com",
-      "password": "123456"
-    }
+  async testarAccessToken() {
+    await this.authService.fetchUser()
 
-    await this.AuthService.authenticate(loginInfo)
-
-    await this.AuthService.fetchUser()
+    this.authService.getUser().subscribe(data => console.log(data))
   }
 
   async ngOnInit(): Promise<void> {
+    this.loading = true
     this.greeting = this.generateGreeting()
 
-    if (!this.AuthService.user) {
-      await this.fetchData()
+    await this.authService.fetchUser()
+
+    this.authService.getUser().subscribe(data => this.user = data)
+
+    if (this.user) {
+      this.userNameFormatted = this.user.name.split(" ")[0];
+      this.days_in_offensive = this.user.days_in_offensive;
+
+      if (this.user.diet) {
+        this.hasDiet = true
+        this.orientations = this.user.diet.orientations
+      }
     }
 
-    if (this.AuthService.user) {
-      this.userNameFormatted = this.AuthService.user.name.split(" ")[0];
-      this.days_in_offensive = this.AuthService.user.days_in_offensive;
-    }
+    this.loading = false
   }
 }

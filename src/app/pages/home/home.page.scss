@@ -38,10 +38,83 @@
   }
 }
 
-#diet {
+#diet,
+#orientations {
   padding: 1rem;
+}
 
-  .title {
-    font-weight: 700;
+
+.title {
+  font-weight: 700;
+}
+
+.orientation-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+
+}
+
+.orientation {
+  border-radius: 8px;
+  color: var(--white);
+
+  .ion-accordion-toggle-icon {
+    color: var(--white)
+  }
+
+  ion-item[slot="header"] {
+    --background: var(--dark-green);
+    --color: var(--white);
+    font-weight: 500;
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 0.750rem;
+      padding: 0.250rem;
+
+      font-size: 24px;
+
+      background-color: var(--light-green);
+      border-radius: 4px;
+    }
+
+    .ion-accordion-toggle-icon {
+      font-size: 20px;
+    }
+  }
+
+  .orientation-content {
+    background-color: var(--dark-green);
+    padding: 0 1rem 0.5rem;
+
+    font-weight: 300;
+
+    .orientation-item {
+      display: flex;
+      align-items: center;
+
+      color: var(--white);
+      border-radius: 8px;
+
+      --padding-start: 0;
+      --background: var(--dark-green);
+      --border-style: none;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+
+        .item {
+          font-size: 16px;
+          font-weight: 400;
+        }
+      }
+    }
   }
 }

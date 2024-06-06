@@ -1,22 +1,49 @@
 <ion-content [fullscreen]="true">
-  <section id="header">
-    <ion-toolbar>
-      <ion-title size="large" slot="start">{{greeting}}, {{userNameFormatted}}</ion-title>
+  <ng-template [ngIf]="loading" [ngIfElse]="content">
+    <app-spinning-loader />
+  </ng-template>
 
-      <div slot="end">
-        <div id="days-in-offensive">
-          <ion-icon src="assets/icons/offensive-days-fire.svg"></ion-icon>
-          <span>{{days_in_offensive}}</span>
+  <ng-template #content>
+    <section id="header">
+      <ion-toolbar>
+        <ion-title size="large" slot="start">{{greeting}}, {{userNameFormatted}}</ion-title>
+
+        <div slot="end">
+          <div id="days-in-offensive">
+            <ion-icon src="assets/icons/offensive-days-fire.svg"></ion-icon>
+            <span>{{days_in_offensive}}</span>
+          </div>
+          <ion-icon src="assets/icons/user-circle.svg" slot="end"></ion-icon>
         </div>
-        <ion-icon src="assets/icons/user-circle.svg" slot="end"></ion-icon>
-      </div>
-    </ion-toolbar>
-  </section>
+      </ion-toolbar>
+    </section>
 
-  <section id="diet">
-    <ion-title class="title">Refeições</ion-title>
+    <section id="diet" *ngIf="hasDiet">
+      <ion-title class="title">Refeições</ion-title>
 
-    <app-meal-accordion></app-meal-accordion>
-  </section>
+      <app-meal-accordion></app-meal-accordion>
+
+    </section>
+    <section id="orientations" *ngIf="orientations">
+      <ion-title class="title">Orientações Nutricionais</ion-title>
+      <ion-accordion-group class="orientation-accordion">
+        <ion-accordion class="orientation">
+          <ion-item class="orientation-header" slot="header">
+            <ion-icon class="icon" src="assets/icons/bookmark.svg"></ion-icon>
+            <ion-label>Observações</ion-label>
+            <ion-icon class="ion-accordion-toggle-icon" src="assets/icons/chevron-down.svg"></ion-icon>
+          </ion-item>
+          <div class="orientation-content" *ngFor="let orientation of orientations" slot="content">
+            <ion-item class="orientation-item">
+              <div class="content">
+                <p class="item">{{orientation}}</p>
+              </div>
+            </ion-item>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </section>
+    <button (click)="testarAccessToken()">Testar access token - chamar rota /me</button>
+  </ng-template>
 </ion-content>
 <app-navbar></app-navbar>

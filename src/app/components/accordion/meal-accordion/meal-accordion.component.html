@@ -1,4 +1,3 @@
-<ion-accordion-group id="meal-group" [multiple]="true">
-  <app-accordion-item></app-accordion-item>
-  <app-accordion-item></app-accordion-item>
+<ion-accordion-group *ngFor="let meal of meals" id="meal-group" [multiple]="true">
+  <app-accordion-item [meal]="meal"></app-accordion-item>
 </ion-accordion-group>

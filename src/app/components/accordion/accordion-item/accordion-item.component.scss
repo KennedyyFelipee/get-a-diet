@@ -72,4 +72,25 @@
       }
     }
   }
+
+  .confirm-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 400;
+
+
+    --background: var(--light-green);
+    --background-activated: var(--dark-green);
+    --background-focused: var(--dark-green);
+    --background-hover: var(--dark-green);
+    --border-radius: 0;
+
+    ion-icon {
+      margin-right: 0.5rem;
+      margin-bottom: 0.250rem;
+    }
+  }
 }
