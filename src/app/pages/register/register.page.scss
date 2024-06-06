@@ -32,6 +32,31 @@ ion-content {
 
       width: 100%;
 
+      .wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.4rem;
+      }
+
+      ion-icon {
+        font-size: 2rem;
+      }
+
+      ion-item {
+        width: 100%;
+        --border-color: #000;
+        --highlight-color-focused: #779E39;
+
+        &.item-has-focus ion-label {
+          color: #779E39 !important;
+        }
+      }
+
+      ion-input {
+        --highlight-color-focused: #000;
+      }
+
       .submit-button {
         align-self: center;
         height: 3rem;

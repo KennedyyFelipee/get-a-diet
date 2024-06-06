@@ -12,14 +12,48 @@
       <ion-title class="subtitle">Crie sua nova conta</ion-title>
     </section>
 
-    <form>
-      <app-input iconPath="assets/icons/user.svg" type="text" label=" Nome"></app-input>
-      <app-input iconPath="assets/icons/phone.svg" type="number" label="Telefone"></app-input>
-      <app-input iconPath="assets/icons/envelope.svg" type="text" label="Email"></app-input>
-      <app-input iconPath="assets/icons/lock.svg" type="password" label="Senha"></app-input>
-      <app-input iconPath="assets/icons/lock.svg" type="password" label="Confirmar Senha"></app-input>
+    <form [formGroup]="registerForm">
+      <div class="wrapper">
+        <ion-icon class="icon" slot="start" src="assets/icons/user.svg" alt="Icone" />
+        <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input type="text" name="name" formControlName="name" />
+        </ion-item>
+      </div>
 
-      <ion-button type="submit" class="submit-button">Cadastrar</ion-button>
+      <div class="wrapper">
+        <ion-icon class="icon" slot="start" src="assets/icons/identification-card.svg" alt="Icone" />
+        <ion-item>
+          <ion-label position="floating">CRN (opcional)</ion-label>
+          <ion-input type="text" name="crn" formControlName="crn" />
+        </ion-item>
+      </div>
+
+      <div class="wrapper">
+        <ion-icon class="icon" slot="start" src="assets/icons/envelope.svg" alt="Icone" />
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="text" name="email" formControlName="email" />
+        </ion-item>
+      </div>
+
+      <div class="wrapper">
+        <ion-icon class="icon" slot="start" src="assets/icons/lock.svg" alt="Icone" />
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input type="password" name="password" formControlName="password" />
+        </ion-item>
+      </div>
+
+      <div class="wrapper">
+        <ion-icon class="icon" slot="start" src="assets/icons/lock.svg" alt="Icone" />
+        <ion-item>
+          <ion-label position="floating">Confirmar Senha</ion-label>
+          <ion-input type="password" name="confirmPassword" formControlName="confirmPassword" />
+        </ion-item>
+      </div>
+
+      <ion-button type="submit" class="submit-button" (click)="onSubmit()">Cadastrar</ion-button>
     </form>
   </main>
 
