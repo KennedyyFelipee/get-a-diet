@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from './services/auth.service';
-import { Axios } from 'axios';
 
 @NgModule({
   declarations: [AppComponent],
