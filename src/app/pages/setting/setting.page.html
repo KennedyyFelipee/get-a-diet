@@ -18,7 +18,7 @@
       <ion-item class="setting" color="transparent" lines="none">
         <ion-icon name="sunny-outline" slot="start" size="large"></ion-icon>
         <p>Dark Mode</p>
-        <ion-toggle slot="end" justify="space-between"></ion-toggle>
+        <ion-toggle [checked]="isDarkMode" (ionChange)='toggleDarkMode()' slot="end" justify="space-between"></ion-toggle>
       </ion-item>
 
       <ion-item class="setting" color="transparent" lines="none">

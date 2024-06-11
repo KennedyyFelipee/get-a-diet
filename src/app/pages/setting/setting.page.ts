@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DarkModeService } from 'src/app/services/dark-mode.service';
 
 @Component({
   selector: 'app-setting',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingPage implements OnInit {
 
-  constructor() { }
+  isDarkMode : boolean = false 
 
-  ngOnInit() {
+  constructor(private darkMode: DarkModeService) { }
+
+  async ngOnInit() {
+
+    this.isDarkMode = this.darkMode.getDarkMode()
+    this.darkMode.applyDarkMode(this.isDarkMode)
+
+  }
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    this.darkMode.setDarkMode(this.isDarkMode)
   }
 
 }
