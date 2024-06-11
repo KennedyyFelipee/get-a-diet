@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  public loginform!: FormGroup 
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.loginform = this.formBuilder.group({
+      email: "",
+      password:""
+    })
+  }
+
+  async onSubmit(): Promise<void> {
+    const { email, password } = this.loginform.value
+
+    const response = await this.authService.authenticate({ email, password })
+
+    console.log(response)
+
+    this.router.navigateByUrl('/')
+
   }
 
 }

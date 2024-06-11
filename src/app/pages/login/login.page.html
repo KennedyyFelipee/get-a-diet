@@ -4,20 +4,21 @@
     <ion-card>
       <ion-card-title class="text">Bem vindo novamente!</ion-card-title>
       <ion-card-subtitle class="text">Acesse sua conta.</ion-card-subtitle>
-
-      <div id="divInputs">
-        <app-input id="inputEmail" iconPath="assets/icons/envelope.svg" type="text" label="E-mail"></app-input>
-        <app-input id="inputPassword" iconPath="assets/icons/lock.svg" type="password" label="Senha"></app-input>
-      </div>
-
+      
+      <form id="divInputs" [formGroup]="loginform">
+        <ion-input id="inputEmail" iconPath="assets/icons/envelope.svg" label="E-mail" type="text" name="email" formControlName="email"/>
+        <ion-input id="inputPassword" iconPath="assets/icons/lock.svg" type="password" label="Senha" name="password" formControlName="password"/>
+      </form>
+      
       <div id="divAlterarSenha">
         <ion-text id="txtAlterarSenha" class="text" [routerLink]="['/detail']">Esqueceu sua senha?</ion-text>
       </div>
 
-      <ion-button expand="block" id="btnEntrar">Entrar</ion-button>
+      <ion-button expand="block" id="btnEntrar" type="submit" class="submit-button" (click)="onSubmit()">Entrar</ion-button>
 
       <div id="divCadastrar">
         <ion-text id="txtCadastrar" class="text" [routerLink]="['/detail']">Não sou cadastrado</ion-text>
+        
       </div>
     </ion-card>
 
