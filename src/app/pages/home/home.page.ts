@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/@types/index.';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { DarkModeService } from 'src/app/services/dark-mode.service';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +19,9 @@ export class HomePage implements OnInit {
   public greeting!: String
   public loading: boolean = true
 
+  isDarkMode : boolean = false 
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private darkMode: DarkModeService) { }
 
   generateGreeting() {
     const timeOfDay = new Date().getHours()
@@ -40,6 +42,10 @@ export class HomePage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
+    this.isDarkMode = this.darkMode.getDarkMode()
+    this.darkMode.applyDarkMode(this.isDarkMode)
+
     this.loading = true
     this.greeting = this.generateGreeting()
 

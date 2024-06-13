@@ -36,6 +36,17 @@
   --light-gray: #e5e5e5;
 }
 
+[color-theme="dark"] {
+  --dark-green: #0F482F;
+  --light-green: #779E39;
+  --black: #000;
+  --white: #fff;
+  --text-gray: #C0C0C0;
+  --light-gray: #e5e5e5;
+  --profile-filter-img: invert(1) brightness(2);
+
+}
+
 * {
   margin: 0;
   padding: 0;
