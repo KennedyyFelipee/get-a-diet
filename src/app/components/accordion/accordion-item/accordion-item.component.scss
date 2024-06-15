@@ -80,7 +80,7 @@
     text-transform: none;
     font-size: 14px;
     font-weight: 400;
-
+    color: var(--white);
 
     --background: var(--light-green);
     --background-activated: var(--dark-green);
@@ -92,5 +92,25 @@
       margin-right: 0.5rem;
       margin-bottom: 0.250rem;
     }
+  }
+}
+
+
+.spinner {
+  animation: is-rotating 1s linear infinite;
+  height: 23px;
+  width: 23px;
+  border-radius: 50%;
+  border: 3px solid var(--white);
+  border-top-color: transparent;
+}
+
+@keyframes is-rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }

@@ -19,8 +19,14 @@
   </div>
 
   <ion-button class="confirm-button" slot="content" (click)="markAsCompleted(meal.title)">
-    <ion-icon src="assets/icons/check.svg" />
-    {{meal.completed ? "Concluida" : "Marcar como concluida"}}
+    <ng-container *ngIf="isLoading; else notLoading">
+      <span class="spinner"></span>
+    </ng-container>
+
+    <ng-template #notLoading>
+      <ion-icon src="assets/icons/check.svg"></ion-icon>
+      {{meal.completed ? "Concluida" : "Marcar como concluida"}}
+    </ng-template>
   </ion-button>
 
 </ion-accordion>
