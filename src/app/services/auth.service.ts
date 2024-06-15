@@ -5,7 +5,6 @@ import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { refreshTokenInvalidError } from '../errors/refresh-token-invalid-error';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClientService } from './http-client.service';
 
 type loginData = {
   email: string,
@@ -23,10 +22,24 @@ type userInput = {
   providedIn: 'root'
 })
 export class AuthService {
+  private http: AxiosInstance
   private userSubject = new BehaviorSubject<User | null>(null);
   user$: Observable<User | null> = this.userSubject.asObservable();
 
-  constructor(private cookies: CookieService, private http: HttpClientService) {
+  constructor(private cookies: CookieService) {
+    this.http = axios.create({
+      baseURL: environment.API_URL,
+    })
+
+    this.http.interceptors.response.use((res) => res, async (err: AxiosError) => {
+      if (err.response?.status === 401) {
+        const res = await this.refreshAccessToken()
+
+        if (res.status !== 200) {
+          throw new refreshTokenInvalidError()
+        }
+      }
+    })
   }
 
   public async refreshAccessToken() {
