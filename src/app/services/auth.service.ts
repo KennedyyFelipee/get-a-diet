@@ -43,20 +43,27 @@ export class AuthService {
   }
 
   public async refreshAccessToken() {
-    const response = await axios.patch(`${environment.API_URL}/token/refresh`, {}, { withCredentials: true })
+    const response = await this.http.patch(`${environment.API_URL}/token/refresh`, {}, { withCredentials: true })
 
     const { token } = response.data
 
-    this.cookies.set('get-a-diet.access-token', token)
+    if (response.status === 200) {
+      this.cookies.set('get-a-diet.access-token', token)
+    }
+
     return response
   }
 
   async authenticate(credentials: loginData) {
     const authResponse = await this.http.post(`/sessions`, credentials, { withCredentials: true })
 
-    const { token } = authResponse.data
+    const { status, data: { token } } = authResponse
 
-    this.cookies.set('get-a-diet.access-token', token)
+    if (status === 200) {
+      this.cookies.set('get-a-diet.access-token', token)
+    }
+
+    return status
   }
 
   async fetchUser() {
@@ -67,14 +74,25 @@ export class AuthService {
       }
     })
 
-    this.userSubject.next(response.data.user)
+    const { data, status } = response
+    if (status === 200) {
+      this.userSubject.next(data.user)
+    }
+
+    return status
   }
 
   async register(newUser: userInput) {
-    await this.http.post('/users', newUser)
+    const { request: { status } } = await this.http.post('/users', newUser)
+
+    return status
   }
 
   getUser() {
     return this.user$
+  }
+
+  getHttpClient() {
+    return this.http
   }
 }
