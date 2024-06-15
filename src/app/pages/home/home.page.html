@@ -18,6 +18,10 @@
       </ion-toolbar>
     </section>
 
+    <section *ngIf="!hasDiet" class="wrapper">
+      <ion-title size="large" slot="start" class="title">Você ainda não segue nenhuma dieta.</ion-title>
+    </section>
+
     <section id="diet" *ngIf="hasDiet">
       <ion-title class="title">Refeições</ion-title>
 
@@ -43,7 +47,6 @@
         </ion-accordion>
       </ion-accordion-group>
     </section>
-    <button (click)="testarAccessToken()">Testar access token - chamar rota /me</button>
   </ng-template>
 </ion-content>
 <app-navbar></app-navbar>
