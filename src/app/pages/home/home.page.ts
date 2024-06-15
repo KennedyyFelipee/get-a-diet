@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/@types/index.';
 
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,9 +20,9 @@ export class HomePage implements OnInit {
   public greeting!: String
   public loading: boolean = true
 
-  isDarkMode : boolean = false 
+  isDarkMode: boolean = false
 
-  constructor(private authService: AuthService, private darkMode: DarkModeService) { }
+  constructor(private authService: AuthService, private darkMode: DarkModeService, private router: Router) { }
 
   generateGreeting() {
     const timeOfDay = new Date().getHours()
@@ -49,20 +50,26 @@ export class HomePage implements OnInit {
     this.loading = true
     this.greeting = this.generateGreeting()
 
-    await this.authService.fetchUser()
+    const responseStatus = await this.authService.fetchUser()
 
-    this.authService.getUser().subscribe(data => this.user = data)
+    if (responseStatus === 200) {
+      this.authService.getUser().subscribe(data => this.user = data)
 
-    if (this.user) {
-      this.userNameFormatted = this.user.name.split(" ")[0];
-      this.days_in_offensive = this.user.days_in_offensive;
+      if (this.user) {
+        this.userNameFormatted = this.user.name.split(" ")[0];
+        this.days_in_offensive = this.user.days_in_offensive;
 
-      if (this.user.diet) {
-        this.hasDiet = true
-        this.orientations = this.user.diet.orientations
+        if (this.user.diet) {
+          this.hasDiet = true
+          this.orientations = this.user.diet.orientations
+        }
       }
+
+      this.loading = false
+    } else {
+      this.router.navigateByUrl('/login')
     }
 
-    this.loading = false
+
   }
 }

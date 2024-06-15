@@ -10,14 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginPage implements OnInit {
 
-  public loginform!: FormGroup 
+  public loginform!: FormGroup
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.loginform = this.formBuilder.group({
       email: "",
-      password:""
+      password: ""
     })
   }
 
@@ -26,9 +26,9 @@ export class LoginPage implements OnInit {
 
     const response = await this.authService.authenticate({ email, password })
 
-    console.log(response)
-
-    this.router.navigateByUrl('/')
+    if (response === 200) {
+      this.router.navigateByUrl('/')
+    }
 
   }
 

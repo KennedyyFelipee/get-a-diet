@@ -31,28 +31,47 @@ export class AuthService {
       baseURL: environment.API_URL,
     })
 
-    this.http.interceptors.response.use((res) => res, async (err: AxiosError) => {
-      if (err.response?.status === 401) {
-        const res = await this.refreshAccessToken()
+    this.http.interceptors.response.use(
+      (res) => res,
+      async (err: AxiosError) => {
+        const originalRequest = err.config;
 
-        if (res.status !== 200) {
-          throw new refreshTokenInvalidError()
+        if (err.response?.status === 401) {
+          const res = await this.refreshAccessToken();
+
+          if (res.status === 200 && originalRequest) {
+            const newAccessToken = this.cookies.get('get-a-diet.access-token');
+
+            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
+
+            return this.http(originalRequest)
+          } else {
+            console.error(`An error occured. Error code: ${res.status} (${res.statusText})`)
+            return err.response.status
+          }
         }
+
+        return Promise.reject(err);
       }
-    })
+    );
   }
 
-  public async refreshAccessToken() {
-    const response = await this.http.patch(`${environment.API_URL}/token/refresh`, {}, { withCredentials: true })
+  async refreshAccessToken() {
+    try {
+      const response = await this.http.patch(`${environment.API_URL}/token/refresh`, {}, { withCredentials: true });
 
-    const { token } = response.data
+      const { token } = response.data;
 
-    if (response.status === 200) {
-      this.cookies.set('get-a-diet.access-token', token)
+      if (response.status === 200) {
+        this.cookies.set('get-a-diet.access-token', token);
+      }
+
+      return response;
+    } catch (err: any) {
+      return err.response
     }
-
-    return response
   }
+
 
   async authenticate(credentials: loginData) {
     const authResponse = await this.http.post(`/sessions`, credentials, { withCredentials: true })
@@ -74,12 +93,13 @@ export class AuthService {
       }
     })
 
-    const { data, status } = response
-    if (status === 200) {
+    if (response.status === 200) {
+      const { data } = response
       this.userSubject.next(data.user)
+
     }
 
-    return status
+    return response.status
   }
 
   async register(newUser: userInput) {
