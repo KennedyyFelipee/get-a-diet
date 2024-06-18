@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from '../@types/index.';
-import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
-import { refreshTokenInvalidError } from '../errors/refresh-token-invalid-error';
+
 import { BehaviorSubject, Observable } from 'rxjs';
 
 type loginData = {
@@ -63,7 +63,8 @@ export class AuthService {
       const { token } = response.data;
 
       if (response.status === 200) {
-        this.cookies.set('get-a-diet.access-token', token);
+        const tenMinutesLater = 1 / 24 / 6
+      this.cookies.set('get-a-diet.access-token', token, {expires: tenMinutesLater})
       }
 
       return response;
