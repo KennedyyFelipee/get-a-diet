@@ -79,7 +79,8 @@ export class AuthService {
     const { status, data: { token } } = authResponse
 
     if (status === 200) {
-      this.cookies.set('get-a-diet.access-token', token)
+      const tenMinutesLater = 1 / 24 / 6
+      this.cookies.set('get-a-diet.access-token', token, {expires: tenMinutesLater})
     }
 
     return status

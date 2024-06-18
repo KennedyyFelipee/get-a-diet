@@ -10,8 +10,6 @@ export class DarkModeService {
   constructor(private cookieService: CookieService) {}
 
   setDarkMode(isDarkMode: boolean) {
-    console.log(this.cookieService.get(this.cookieName))
-
     const value = isDarkMode ? 'enabled' : 'disabled';
     this.cookieService.set(this.cookieName, value, { path: '/', expires: 365 });
   
@@ -20,7 +18,6 @@ export class DarkModeService {
 
   getDarkMode(): boolean {
     const value = this.cookieService.get(this.cookieName);
-    console.log(value)
     return value === 'enabled';
   }
 
