@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
     const response = await this.authService.authenticate({ email, password })
 
     if (response === 200) {
-      this.router.navigateByUrl('/')
+      this.router.navigateByUrl('/').then(() => window.location.reload())
     }
 
   }
