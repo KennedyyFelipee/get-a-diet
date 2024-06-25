@@ -1,0 +1,100 @@
+ion-toolbar {
+    height: 10%;
+    display: flex;
+    align-items: center;
+   
+  }
+  
+  .toolbar-title {
+   height: 100%;
+   width: 100%;
+    text-align: center; /* Centraliza o texto */
+    margin-right: 2.8rem;
+  }
+
+  ion-back-button {
+    filter: var(--profile-filter-img)
+}
+
+#content-wrapper {
+    display: grid;
+    grid-template-rows: 30% 70%;
+    height: 90%;
+    width: 100%;
+}
+
+#profile-image {
+    align-self: center;
+    justify-self: center;
+    font-size: 200px;
+}
+
+.settings-wrapper {
+    width: 100%;
+    flex: 1;
+    height: 100%;
+    align-self:self-end;
+    border-radius: 20px 20px 0 0 ;
+    padding: 1rem;
+
+    .credits {
+        margin-top: 2rem;
+    }
+
+}
+
+.btn {
+    --padding-start: 0;
+    --padding-end: 0;
+    margin-top: 1rem;
+   
+    border-radius: 20px;
+    padding: 0.5rem;
+    width: 100%;
+   background-color: var(--light-green);
+
+    ion-icon[slot='start']{
+        margin-right: 0.5rem;
+    }
+
+    ion-button ion-icon{
+        color: var(--white);
+
+    }
+
+    ion-toggle {
+        margin-right: 0.750rem;
+    }
+
+    p {
+        width: 100%;
+        text-align: center;
+    }
+    
+
+}
+
+.title {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    width: 100%;
+}
+
+#profile-image {
+    filter: var(--profile-filter-img)
+}
+
+
+.submit-button {
+    --padding-start: 0;
+    --padding-end: 0;
+    margin-top: 1rem;
+   
+    border-radius: 20px;
+    width: 100%;
+    height: 50px;
+    --border-radius: 16px;
+    --color: #FFF;
+    --background: var(--light-green)
+  }

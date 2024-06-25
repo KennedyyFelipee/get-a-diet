@@ -1,0 +1,54 @@
+<ion-content>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="/" icon="assets/icons/back-arrow.svg"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="toolbar-title">Edit Profile</ion-title>
+  </ion-toolbar>
+
+  <div id="content-wrapper">
+
+    <ion-icon id='profile-image' src='assets/icons/user-circle.svg'></ion-icon>
+
+    <div class="settings-wrapper">
+
+      <form>
+
+        <div class="wrapper">
+          <ion-icon class="icon" slot="start" src="assets/icons/user.svg" alt="Icone" />
+          <ion-item>
+            <ion-label position="floating"></ion-label>
+            <ion-input type="text" value = "João Gabriel" name="confirmPassword"/>
+          </ion-item>
+          <ion-icon class="icon" slot="start" src="assets/svg/Edit.svg" alt="Icone" />
+        </div>
+
+        <div class="wrapper">
+          <ion-icon class="icon" slot="start" src="assets/icons/envelope.svg" alt="Icone" />
+          <ion-item>
+            <ion-label position="floating"></ion-label>
+            <ion-input type="text" value = "teste@gmail.com" name="confirmPassword"/>
+          </ion-item>
+          <ion-icon class="icon" slot="start" src="assets/svg/Edit.svg" alt="Icone" />
+        </div>
+
+        <div class="wrapper">
+          <ion-icon class="icon" slot="start" src="assets/icons/lock.svg" alt="Icone" />
+          <ion-item>
+            <ion-label position="floating"></ion-label>
+            <ion-input type="password" value = "123456" name="confirmPassword"/>
+          </ion-item>
+          <ion-icon class="icon" slot="start" src="assets/svg/Edit.svg" alt="Icone" />
+        </div>
+
+        <ion-button type="submit" class="submit-button">save</ion-button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</ion-content>
+

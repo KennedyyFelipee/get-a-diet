@@ -20,8 +20,6 @@ export class HomePage implements OnInit {
   public greeting!: String
   public loading: boolean = true
 
-  isDarkMode: boolean = false
-
   constructor(private authService: AuthService, private darkMode: DarkModeService, private router: Router) { }
 
   generateGreeting() {
@@ -44,8 +42,8 @@ export class HomePage implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    this.isDarkMode = this.darkMode.getDarkMode()
-    this.darkMode.applyDarkMode(this.isDarkMode)
+    const isDarkMode = this.darkMode.getDarkMode();
+    this.darkMode.applyDarkMode(isDarkMode);
 
     this.loading = true
     this.greeting = this.generateGreeting()

@@ -1,0 +1,123 @@
+ion-toolbar {
+    height: 10%;
+    display: flex;
+    align-items: center;
+   
+  }
+  
+  .toolbar-title {
+   height: 100%;
+    text-align: center; /* Centraliza o texto */
+    margin-right: 2.8rem;
+  }
+
+#content-wrapper {
+    display: grid;
+    grid-template-rows: 30% 70%;
+    height: 90%;
+    width: 100%;
+}
+
+#profile-image {
+    align-self: center;
+    justify-self: center;
+    font-size: 200px;
+}
+
+.settings-wrapper {
+    width: 100%;
+    flex: 1;
+    height: 100%;
+    align-self:self-end;
+    border-radius: 20px 20px 0 0 ;
+    padding: 1rem;
+
+    .credits {
+        margin-top: 2rem;
+    }
+
+}
+
+.button {
+    --padding-start: 0;
+    --padding-end: 0;
+
+    border-radius: 20px;
+    padding: 0.5rem;
+    width: 100%;
+   
+
+    ion-icon[slot='start']{
+        margin-right: 0.5rem;
+    }
+
+    ion-button ion-icon{
+        color: var(--white);
+
+    }
+
+    ion-toggle {
+        margin-right: 0.750rem;
+    }
+    
+
+}
+
+.title {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    width: 100%;
+}
+
+#profile-image {
+    filter: var(--profile-filter-img)
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    width: 100%;
+
+    .wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0 0.4rem;
+      
+    }
+
+    ion-icon {
+      font-size: 2rem;
+      filter: var(--profile-filter-img)
+    }
+
+    ion-item {
+      width: 100%;
+      --border-color: #000;
+      --highlight-color-focused: #779E39;
+      --background: transparent;
+      &.item-has-focus ion-label {
+        color: #779E39 !important;
+      }
+    }
+
+    ion-input {
+      --highlight-color-focused: #000;
+      
+    }
+
+    .submit-button {
+      align-self: center;
+      height: 3rem;
+      width: 50%;
+      margin-top: 5rem;
+      font-weight: bold;
+
+      --border-radius: 16px;
+      --color: #FFF;
+      --background: #0F482F
+    }
+  }

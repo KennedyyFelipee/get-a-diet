@@ -8,6 +8,10 @@
     font-weight: 400;
   }
 
+  ion-toolbar {
+    --background: transparent;
+  }
+
   div {
     display: flex;
     align-items: center;
@@ -34,7 +38,13 @@
 
     ion-icon {
       font-size: 48px;
+      
     }
+
+    .profile-icon {
+      filter: var(--profile-filter-img)
+    }
+
   }
 }
 
