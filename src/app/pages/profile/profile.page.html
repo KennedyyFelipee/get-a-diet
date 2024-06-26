@@ -1,4 +1,4 @@
-<ion-content>
+<!-- <ion-content>
   
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -20,7 +20,71 @@
 
       <ion-button type="text" class="submit-button">Terms and Contract</ion-button>
     
-      <ion-button type="text" class="submit-button">Log Out</ion-button>
+      <ion-button type="text" class="submit-button" (click)="logout()">Log Out</ion-button>
+
+    </div>
+
+  </div>
+
+</ion-content>
+ -->
+
+
+
+
+
+
+
+
+ <ion-content>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="/" icon="assets/icons/back-arrow.svg"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="toolbar-title">Profile</ion-title>
+  </ion-toolbar>
+
+  <div id="content-wrapper">
+
+    <ion-icon id='profile-image' src='assets/icons/user-circle.svg'></ion-icon>
+
+    <div class="settings-wrapper">
+
+      <form>
+
+        <div class="wrapper">
+          <ion-icon class="icon" slot="start" src="assets/icons/user.svg" alt="Icone" />
+          <ion-item lines="none">
+            <ion-label position="floating"></ion-label>
+            <ion-input [disabled]="true" type="text" value = "{{userName}}" name="confirmPassword"/>
+          </ion-item>
+         
+        </div>
+
+        <div class="wrapper">
+          <ion-icon class="icon" slot="start" src="assets/icons/envelope.svg" alt="Icone" />
+          <ion-item lines="none">
+            <ion-label position="floating"></ion-label>
+            <ion-input [disabled]="true" type="text" value = "{{email}}" name="confirmPassword"/>
+          </ion-item>
+        
+        </div>
+
+        <div class="wrapper">
+          <ion-icon class="icon" slot="start" src="assets/icons/identification-card.svg" alt="Icone" />
+          <ion-item lines="none">
+            <ion-label position="floating"></ion-label>
+            <ion-input [disabled]="true" type="text" value = "{{crn}}" name="confirmPassword"/>
+          </ion-item>
+         
+        </div>
+
+        
+
+      </form>
+
+      <ion-button type="text" class="submit-button" (click)="logout()">Log Out</ion-button>
 
     </div>
 

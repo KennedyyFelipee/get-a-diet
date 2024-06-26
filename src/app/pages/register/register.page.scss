@@ -41,10 +41,12 @@ ion-content {
 
       ion-icon {
         font-size: 2rem;
+        filter: var(--profile-filter-img)
       }
 
       ion-item {
         width: 100%;
+        --background: transparent;
         --border-color: #000;
         --highlight-color-focused: #779E39;
 

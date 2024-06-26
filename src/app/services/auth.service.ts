@@ -110,6 +110,27 @@ export class AuthService {
     return status
   }
 
+  async logout() {
+    try {
+      const accessToken = this.cookies.get('get-a-diet.access-token');
+      await this.http.delete(`${environment.API_URL}/sessions`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials : true
+      });
+
+      this.cookies.delete('get-a-diet.access-token');
+      this.cookies.delete('get-a-diet.refreshToken');
+     
+      return true;
+    } catch (error) {
+     
+      console.error('Erro ao fazer logout:', error);
+      return false;
+    }
+  }
+
   getUser() {
     return this.user$
   }

@@ -12,20 +12,20 @@
       <ion-title class="subtitle">Crie sua nova conta</ion-title>
     </section>
 
-    <form [formGroup]="registerForm">
+    <form [formGroup]="registerForm" #myForm="ngForm">
       <div class="wrapper">
         <ion-icon class="icon" slot="start" src="assets/icons/user.svg" alt="Icone" />
         <ion-item>
           <ion-label position="floating">Nome</ion-label>
-          <ion-input type="text" name="name" formControlName="name" />
+          <ion-input #inputFields required type="text" name="name" formControlName="name" />
         </ion-item>
       </div>
 
-      <div class="wrapper">
+      <div class="wrapper" >
         <ion-icon class="icon" slot="start" src="assets/icons/identification-card.svg" alt="Icone" />
         <ion-item>
           <ion-label position="floating">CRN (opcional)</ion-label>
-          <ion-input type="text" name="crn" formControlName="crn" />
+          <ion-input #inputFields type="text" name="crn" formControlName="crn" />
         </ion-item>
       </div>
 
@@ -33,15 +33,15 @@
         <ion-icon class="icon" slot="start" src="assets/icons/envelope.svg" alt="Icone" />
         <ion-item>
           <ion-label position="floating">Email</ion-label>
-          <ion-input type="text" name="email" formControlName="email" />
+          <ion-input #inputFields type="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required formControlName="email" />
         </ion-item>
       </div>
 
       <div class="wrapper">
         <ion-icon class="icon" slot="start" src="assets/icons/lock.svg" alt="Icone" />
         <ion-item>
-          <ion-label position="floating">Senha</ion-label>
-          <ion-input type="password" name="password" formControlName="password" />
+          <ion-label  position="floating">Senha</ion-label>
+          <ion-input #inputFields ngModel minlength="6" maxlength="6" required type="password" name="password" formControlName="password" />
         </ion-item>
       </div>
 
@@ -49,7 +49,7 @@
         <ion-icon class="icon" slot="start" src="assets/icons/lock.svg" alt="Icone" />
         <ion-item>
           <ion-label position="floating">Confirmar Senha</ion-label>
-          <ion-input type="password" name="confirmPassword" formControlName="confirmPassword" />
+          <ion-input #inputFields required type="password" name="confirmPassword" formControlName="confirmPassword" />
         </ion-item>
       </div>
 
