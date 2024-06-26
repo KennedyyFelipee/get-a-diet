@@ -132,3 +132,41 @@
 .wrapper {
   padding: 0 1rem;
 }
+
+.search-diet-item {
+  margin: 0 1rem;
+  color: var(--white);
+  border-radius: 8px;
+  font-weight: 400;
+
+  --background: var(--dark-green);
+  --border-style: none;
+  --padding-top: 0.250rem;
+  --padding-bottom: 0.250rem;
+  
+  .confirm-button {
+    display: flex;
+    align-items: center;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--white);
+    padding: 0.5rem;
+    
+    --background: var(--light-green);
+    --background-activated: var(--dark-green);
+    --background-focused: var(--dark-green);
+    --background-hover: var(--dark-green);
+    --border-radius: 8px;
+    --padding-top: 0.5rem;
+    --padding-end: 0.5rem;
+    --padding-bottom: 0.5rem;
+    --padding-start: 0.5rem;
+    
+    ion-icon {
+      color: var(--white);
+      margin-right: 0.5rem;
+      margin-bottom: 0.250rem;
+    }
+  }
+}

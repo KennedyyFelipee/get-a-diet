@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/@types/index.';
+import { CookieService } from 'ngx-cookie-service';
+import { Diet, User } from 'src/app/@types/index.';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { DarkModeService } from 'src/app/services/dark-mode.service';
@@ -16,11 +17,16 @@ export class HomePage implements OnInit {
   public days_in_offensive: number = 0
   public orientations: string[] | null = null
   public hasDiet: boolean = false
-
+  
   public greeting!: String
   public loading: boolean = true
+  
+  private dietsList: Diet[] = []
 
-  constructor(private authService: AuthService, private darkMode: DarkModeService, private router: Router) { }
+  public filteredList: Diet[] | null = []
+
+
+  constructor(private authService: AuthService, private darkMode: DarkModeService, private router: Router, private cookies: CookieService) { }
 
   generateGreeting() {
     const timeOfDay = new Date().getHours()
@@ -34,10 +40,32 @@ export class HomePage implements OnInit {
     }
   }
 
-  async testarAccessToken() {
-    await this.authService.fetchUser()
 
-    this.authService.getUser().subscribe(data => console.log(data))
+
+  handleInput(event: any) {
+    const query: string = event.target.value.toLowerCase();
+
+    this.filteredList = this.dietsList.filter(diet => {
+      if(diet.title.toLowerCase().includes(query)) {
+        return true
+      } else if (diet.id.toLowerCase() === query.toLowerCase()) {
+        return true
+      }
+      return null
+    })    
+  }
+
+  async handleSetDietToUser(dietId: string) {
+    const accessToken = this.cookies.get('get-a-diet.access-token')
+    await this.authService.getHttpClient().put('/set-new-diet', {dietId} , {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+
+    
+      await this.router.navigateByUrl('/home', {onSameUrlNavigation: 'reload', })
+    
   }
 
   async ngOnInit(): Promise<void> {
@@ -52,6 +80,9 @@ export class HomePage implements OnInit {
 
     if (responseStatus === 200) {
       this.authService.getUser().subscribe(data => this.user = data)
+      const getDietsListResponse = await this.authService.getHttpClient().get('/diets')
+
+      this.dietsList = getDietsListResponse.data.diets
 
       if (this.user) {
         this.userNameFormatted = this.user.name.split(" ")[0];

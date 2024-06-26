@@ -18,6 +18,20 @@
       </ion-toolbar>
     </section>
 
+    <section>
+      <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Pesquise uma dieta por titulo ou id" show-clear-button="focus"></ion-searchbar>
+
+      <ion-list *ngIf="filteredList">
+        <ion-item class="search-diet-item" *ngFor="let diet of filteredList">
+          <ion-label>{{ diet.title }}</ion-label>
+          <ion-button class="confirm-button" (click)="handleSetDietToUser(diet.id)">    
+            <ion-icon src="assets/icons/download-simple.svg"></ion-icon>
+              Baixar
+            </ion-button>
+        </ion-item>
+      </ion-list>
+    </section>
+
     <section *ngIf="!hasDiet" class="wrapper">
       <ion-title size="large" slot="start" class="title">Você ainda não segue nenhuma dieta.</ion-title>
     </section>
