@@ -13,7 +13,7 @@ type loginData = {
 
 type userInput = {
   name: string,
-  crn: string,
+  crn: string | null,
   email: string,
   password: string,
 }

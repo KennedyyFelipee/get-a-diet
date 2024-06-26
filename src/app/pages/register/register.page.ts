@@ -74,7 +74,12 @@ export class RegisterPage implements OnInit {
   
   async onSubmit(): Promise<void> {
     if (this.registerForm.valid) {
-      const { name, crn, email, password } = this.registerForm.value;
+      const { name, email, password } = this.registerForm.value;
+      let { crn } = this.registerForm.value
+
+      if(crn.length < 1) {
+        crn = null
+      }
 
       await this.authService.register({ name, crn, email, password });
 
