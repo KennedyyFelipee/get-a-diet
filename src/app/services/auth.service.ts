@@ -105,9 +105,12 @@ export class AuthService {
   }
 
   async register(newUser: userInput) {
-    const { request: { status } } = await this.http.post('/users', newUser)
-
-    return status
+    try {
+      const response = await this.http.post('/users', newUser)
+      return response
+    } catch (error:any) {
+      return error.response
+    }
   }
 
   async logout() {

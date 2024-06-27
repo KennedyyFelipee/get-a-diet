@@ -46,4 +46,45 @@ ion-button {
   --background-activated: #00875f;
   --color: rgb(255, 255, 255);
   --font-weight: bold;
+  margin-top: 40px;
+
+}
+
+ion-card-subtitle {
+  margin-bottom: 15%;
+  
+}
+
+form {
+
+  
+
+  ion-icon {
+    font-size: 2rem;
+    filter: var(--profile-filter-img)
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0.4rem;
+  }
+
+  ion-item {
+    width: 100%;
+    --border-color: #000;
+    --highlight-color-focused: #779E39;
+    --background: transparent;
+    &.item-has-focus ion-label {
+      color: #779E39 !important;
+    }
+  }
+
+  ion-input {
+    --highlight-color-focused: #000;
+    
+  }
+
+
 }

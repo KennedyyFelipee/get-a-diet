@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -19,7 +19,8 @@ export class RegisterPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private darkMode: DarkModeService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private elementRef:ElementRef
   ) { }
 
   private MatchPassword(password: string, confirmPassword: string) {
@@ -63,6 +64,26 @@ export class RegisterPage implements OnInit {
     
   }
 
+  async onInputBlur(event: any) {
+    console.log(event.target.value);
+    const crn = event.target.value
+    const response = await this.authService.getHttpClient().post("/verify/crn", {crn})
+    console.log(response)
+    const {crnInfo} = response.data 
+    if (crnInfo === null || crnInfo.valid === false){
+      const crnControl = this.registerForm.get('crn');
+      if (crnControl && crnControl.value.length > 0) {
+        crnControl.setErrors({ invalidSub: true });
+        await this.presentToast('Numero de CRN inválido.');
+      }
+    }else {
+      const crnControl = this.registerForm.get('crn');
+      if (crnControl) {
+        crnControl.setErrors(null);
+      }
+    }
+  }
+
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message,
@@ -81,11 +102,26 @@ export class RegisterPage implements OnInit {
         crn = null
       }
 
-      await this.authService.register({ name, crn, email, password });
+      const registerResponse = await this.authService.register({ name, crn, email, password });
+      console.log(registerResponse)
+      if (registerResponse.status === 409 && registerResponse.data.message === 'E-mail already exists.') {
+        
+        await this.presentToast('Este email ja esta em uso. Por favor escolha outro.');
 
-      await this.authService.authenticate({ email, password });
+        const emailControl = this.registerForm.get('email');
+        if (emailControl) {
+          emailControl.setErrors({ emailAlreadyExist: true });
+          Object.values(this.registerForm.controls).forEach(control => {
+            control.markAsTouched();
+          });
+        }
 
-      this.router.navigateByUrl('/');
+      }
+
+      if (registerResponse.status === 201) {
+        await this.authService.authenticate({ email, password });
+        this.router.navigateByUrl('/');
+      }
 
     } else {
 

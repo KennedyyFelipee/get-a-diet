@@ -1,26 +1,37 @@
 <ion-content [fullscreen]="true" padding class="background">
   <div id="card">
-
     <ion-card>
       <ion-card-title class="text">Bem vindo novamente!</ion-card-title>
       <ion-card-subtitle class="text">Acesse sua conta.</ion-card-subtitle>
       
-      <form id="divInputs" [formGroup]="loginform">
-        <ion-input id="inputEmail" iconPath="assets/icons/envelope.svg" label="E-mail" type="text" name="email" formControlName="email"/>
-        <ion-input id="inputPassword" iconPath="assets/icons/lock.svg" type="password" label="Senha" name="password" formControlName="password"/>
-      </form>
-      
-      <div id="divAlterarSenha">
-        <ion-text id="txtAlterarSenha" class="text" [routerLink]="['/detail']">Esqueceu sua senha?</ion-text>
-      </div>
-
-      <ion-button expand="block" id="btnEntrar" type="submit" class="submit-button" (click)="onSubmit()">Entrar</ion-button>
-
-      <div id="divCadastrar">
-        <ion-text id="txtCadastrar" class="text" [routerLink]="['/register']">Não sou cadastrado</ion-text>
+      <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
+        <div class="wrapper">
+          <ion-icon class="icon" slot="start" src="assets/icons/envelope.svg" alt="Icone" />
+          <ion-item>
+           
+            <ion-label position="floating">E-mail</ion-label>
+            <ion-input type="email" formControlName="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"></ion-input>
+          </ion-item>
+        </div>
         
-      </div>
-    </ion-card>
+        <div class="wrapper">
+          <ion-icon class="icon" slot="start" src="assets/icons/lock.svg" alt="Icone" />
+          <ion-item>
+            <ion-label position="floating">Senha</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+        </div>
+        
+        <!-- <div id="divAlterarSenha">
+          <ion-text id="txtAlterarSenha" class="text" [routerLink]="['/detail']">Esqueceu sua senha?</ion-text>
+        </div> -->
 
+        <ion-button expand="block" type="submit" class="submit-button">Entrar</ion-button>
+
+        <div id="divCadastrar">
+          <ion-text id="txtCadastrar" class="text" [routerLink]="['/register']">Não sou cadastrado</ion-text>
+        </div>
+      </form>
+    </ion-card>
   </div>
 </ion-content>
