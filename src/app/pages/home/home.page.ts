@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Diet, User } from 'src/app/@types/index.';
@@ -12,7 +12,10 @@ import { DarkModeService } from 'src/app/services/dark-mode.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  private user!: User | null
+
+  public showToast: boolean = false;
+
+  private user!: User | null 
   public userNameFormatted: string = ""
   public days_in_offensive: number = 0
   public orientations: string[] | null = null
@@ -57,15 +60,18 @@ export class HomePage implements OnInit {
 
   async handleSetDietToUser(dietId: string) {
     const accessToken = this.cookies.get('get-a-diet.access-token')
-    await this.authService.getHttpClient().put('/set-new-diet', {dietId} , {
-      headers: {
+    await this.authService.getHttpClient().put('/set-new-diet', {dietId} , 
+    { headers: {
         Authorization: `Bearer ${accessToken}`
       }
     })
 
+    this.showToast = true; // Exibe o aviso
     
-      await this.router.navigateByUrl('/home', {onSameUrlNavigation: 'reload', })
-    
+    // Aguarda o toast aparecer antes de atualizar os dados
+    setTimeout(async () => {
+      await this.loadData();
+    }, 1000);
   }
 
   async ngOnInit(): Promise<void> {
@@ -88,6 +94,9 @@ export class HomePage implements OnInit {
         this.userNameFormatted = this.user.name.split(" ")[0];
         this.days_in_offensive = this.user.days_in_offensive;
 
+          // Correção rápida: log para verificar se o valor está vindo
+          console.log('Dias em ofensiva: ', this.days_in_offensive);
+
         if (this.user.diet) {
           this.hasDiet = true
           this.orientations = this.user.diet.orientations
@@ -99,6 +108,37 @@ export class HomePage implements OnInit {
       this.router.navigateByUrl('/login')
     }
 
+    await this.loadData(); //metodo para recarregar os dados apos trocar uma dieta
 
+  }
+  // metodo para recarregar os dados apos trocar uma dieta
+  async loadData(): Promise<void> {
+    this.loading = true;
+    this.greeting = this.generateGreeting();
+
+    const responseStatus = await this.authService.fetchUser();
+
+    if (responseStatus === 200) {
+      this.authService.getUser().subscribe(data => this.user = data);
+      const getDietsListResponse = await this.authService.getHttpClient().get('/diets');
+      this.dietsList = getDietsListResponse.data.diets;
+
+      if (this.user) {
+        this.userNameFormatted = this.user.name.split(" ")[0];
+        this.days_in_offensive = this.user.days_in_offensive;
+
+        if (this.user.diet) {
+          this.hasDiet = true;
+          this.orientations = this.user.diet.orientations;
+        } else {
+          this.hasDiet = false;
+          this.orientations = null;
+        }
+      }
+
+      this.loading = false;
+    } else {
+      this.router.navigateByUrl('/login');
+    }
   }
 }

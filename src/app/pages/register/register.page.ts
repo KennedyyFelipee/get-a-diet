@@ -58,6 +58,7 @@ export class RegisterPage implements OnInit {
       email: [''],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
+      cep: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]], // novo campo
     }, {
       validators: this.MatchPassword('password', 'confirmPassword')
     });
@@ -134,9 +135,34 @@ export class RegisterPage implements OnInit {
       } else {
         await this.presentToast('Formulário inválido. Por favor, preencha todos os campos corretamente.');
       }
-
-      //await this.presentToast('Formulário inválido. Por favor, preencha todos os campos corretamente.');
+ 
       console.error('Formulário inválido.');
     }
   }
+ 
+    rua: string = '';
+
+    async buscarCep() {
+      const cep = this.registerForm.get('cep')?.value;
+      if (!cep || cep.length !== 8) {
+        this.rua = '';
+        
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+
+        if (data.erro) {
+          this.rua = 'CEP inválido';
+        } else {
+          this.rua = data.logradouro || 'Rua não encontrada';
+        }
+
+      } catch (error) {
+        console.error('Erro ao buscar CEP:', error);
+        this.rua = 'Erro ao buscar';
+      }
+    }
 }

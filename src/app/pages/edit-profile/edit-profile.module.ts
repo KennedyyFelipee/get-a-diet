@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { EditProfilePageRoutingModule } from './edit-profile-routing.module';
 
 import { EditProfilePage } from './edit-profile.page';
-import { SharedComponentModule } from 'src/app/shared/shared-component/shared-component.module';
 
 @NgModule({
   imports: [
@@ -15,7 +14,6 @@ import { SharedComponentModule } from 'src/app/shared/shared-component/shared-co
     FormsModule,
     IonicModule,
     EditProfilePageRoutingModule,
-    SharedComponentModule,
   ],
   declarations: [EditProfilePage]
 })

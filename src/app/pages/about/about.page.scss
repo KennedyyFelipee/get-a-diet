@@ -1,0 +1,30 @@
+ion-card-content p,
+ion-card-content ul {
+  font-size: 14px;
+  line-height: 20px;
+  color: #444;
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ion-card-subtitle {
+  font-size: 14px;
+  color: #666;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+ion-button {
+  --border-radius: 10px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}

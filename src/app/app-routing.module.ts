@@ -30,12 +30,19 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
-  },  {
+  },
+  {
     path: 'edit-profile',
     loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
   },
-
-
+  {//mexi nessa rota aqui
+  path: 'create-diet',
+  loadChildren: () => import('./pages/create-diet/create-diet.module').then(m => m.CreateDietPageModule)
+  },
+  {//mexi nessa rota aqui
+  path: 'about',
+  loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule)
+ }
 ];
 
 @NgModule({

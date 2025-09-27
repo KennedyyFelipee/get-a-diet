@@ -3,36 +3,35 @@ import { User } from '../@types/index.';
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
-
 import { BehaviorSubject, Observable } from 'rxjs';
 
 type loginData = {
-  email: string,
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 type userInput = {
-  name: string,
-  crn: string | null,
-  email: string,
-  password: string,
-}
+  name: string;
+  crn: string | null;
+  email: string;
+  password: string;
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private http: AxiosInstance
+  private http: AxiosInstance;
   private userSubject = new BehaviorSubject<User | null>(null);
   user$: Observable<User | null> = this.userSubject.asObservable();
 
   constructor(private cookies: CookieService) {
     this.http = axios.create({
       baseURL: environment.API_URL,
-    })
+    });
 
     this.http.interceptors.response.use(
-      (res) => res,
+      res => res,
       async (err: AxiosError) => {
         const originalRequest = err.config;
 
@@ -41,13 +40,11 @@ export class AuthService {
 
           if (res.status === 200 && originalRequest) {
             const newAccessToken = this.cookies.get('get-a-diet.access-token');
-
-            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
-
-            return this.http(originalRequest)
+            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+            return this.http(originalRequest);
           } else {
-            console.error(`An error occured. Error code: ${res.status} (${res.statusText})`)
-            return err.response.status
+            console.error(`Erro ao renovar token: ${res.status} (${res.statusText})`);
+            return err.response?.status;
           }
         }
 
@@ -59,57 +56,53 @@ export class AuthService {
   async refreshAccessToken() {
     try {
       const response = await this.http.patch(`${environment.API_URL}/token/refresh`, {}, { withCredentials: true });
-
       const { token } = response.data;
 
       if (response.status === 200) {
-        const tenMinutesLater = 1 / 24 / 6
-      this.cookies.set('get-a-diet.access-token', token, {expires: tenMinutesLater})
+        const tenMinutesLater = 1 / 24 / 6;
+        this.cookies.set('get-a-diet.access-token', token, { expires: tenMinutesLater });
       }
 
       return response;
     } catch (err: any) {
-      return err.response
+      return err.response;
     }
   }
 
-
   async authenticate(credentials: loginData) {
-    const authResponse = await this.http.post(`/sessions`, credentials, { withCredentials: true })
-
-    const { status, data: { token } } = authResponse
+    const authResponse = await this.http.post(`/sessions`, credentials, { withCredentials: true });
+    const { status, data: { token } } = authResponse;
 
     if (status === 200) {
-      const tenMinutesLater = 1 / 24 / 6
-      this.cookies.set('get-a-diet.access-token', token, {expires: tenMinutesLater})
+      const tenMinutesLater = 1 / 24 / 6;
+      this.cookies.set('get-a-diet.access-token', token, { expires: tenMinutesLater });
     }
 
-    return status
+    return status;
   }
 
   async fetchUser() {
-    const accessToken = this.cookies.get('get-a-diet.access-token')
+    const accessToken = this.cookies.get('get-a-diet.access-token');
     const response = await this.http.get(`/me`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
-    })
+    });
 
     if (response.status === 200) {
-      const { data } = response
-      this.userSubject.next(data.user)
-
+      const { data } = response;
+      this.userSubject.next(data.user);
     }
 
-    return response.status
+    return response.status;
   }
 
   async register(newUser: userInput) {
     try {
-      const response = await this.http.post('/users', newUser)
-      return response
-    } catch (error:any) {
-      return error.response
+      const response = await this.http.post('/users', newUser);
+      return response;
+    } catch (error: any) {
+      return error.response;
     }
   }
 
@@ -120,25 +113,28 @@ export class AuthService {
         headers: {
           Authorization: `Bearer ${accessToken}`
         },
-        withCredentials : true
+        withCredentials: true
       });
 
       this.cookies.delete('get-a-diet.access-token');
       this.cookies.delete('get-a-diet.refreshToken');
-     
+
       return true;
     } catch (error) {
-     
       console.error('Erro ao fazer logout:', error);
       return false;
     }
   }
 
-  getUser() {
-    return this.user$
+  getUser(): Observable<User | null> {
+    return this.user$;
   }
 
-  getHttpClient() {
-    return this.http
+  getUserId(): string {
+    return this.userSubject.value?.id ?? '';
+  }
+
+  getHttpClient(): AxiosInstance {
+    return this.http;
   }
 }

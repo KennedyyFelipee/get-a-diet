@@ -6,10 +6,9 @@
   </ion-toolbar>
 
   <main class="container">
+    <!-- Troquei ion-title por h1 -->
     <section class="title-wrapper">
-      <ion-title class="title">Criar Conta</ion-title>
-
-      <ion-title class="subtitle">Crie sua nova conta</ion-title>
+      <h1 class="title">Crie sua nova Conta</h1>
     </section>
 
     <form [formGroup]="registerForm" #myForm="ngForm">
@@ -21,7 +20,7 @@
         </ion-item>
       </div>
 
-      <div class="wrapper" >
+      <div class="wrapper">
         <ion-icon class="icon" slot="start" src="assets/icons/identification-card.svg" alt="Icone" />
         <ion-item>
           <ion-label position="floating">CRN (opcional)</ion-label>
@@ -40,7 +39,7 @@
       <div class="wrapper">
         <ion-icon class="icon" slot="start" src="assets/icons/lock.svg" alt="Icone" />
         <ion-item>
-          <ion-label  position="floating">Senha</ion-label>
+          <ion-label position="floating">Senha</ion-label>
           <ion-input #inputFields ngModel minlength="6" maxlength="6" required type="password" name="password" formControlName="password" />
         </ion-item>
       </div>
@@ -53,8 +52,23 @@
         </ion-item>
       </div>
 
+      <div class="wrapper">
+        <ion-icon class="icon" slot="start" src="assets/icons/map-pin.svg" alt="Icone" />
+        <ion-item>
+          <ion-label position="floating">CEP</ion-label>
+          <ion-input type="text" maxlength="8" formControlName="cep" (ionBlur)="buscarCep()" />
+        </ion-item>
+      </div>
+
+      <div class="wrapper">
+        <ion-icon class="icon" slot="start" src="assets/icons/road.svg" alt="Icone" />
+        <ion-item>
+          <ion-label position="floating">Rua</ion-label>
+          <ion-input readonly [value]="rua" />
+        </ion-item>
+      </div>
+
       <ion-button type="submit" class="submit-button" (click)="onSubmit()">Cadastrar</ion-button>
     </form>
   </main>
-
 </ion-content>

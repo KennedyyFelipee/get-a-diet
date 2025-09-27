@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-text color="success">
+      <h1 class="page-title">Crie Uma Dieta</h1>
+    </ion-text>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-toast
+    [isOpen]="showToast"
+    message="Dieta criada com sucesso!"
+    duration="2000"
+    color="success"
+    position="top"
+    (didDismiss)="showToast = false">
+  </ion-toast>
+
+  <form [formGroup]="dietForm" (ngSubmit)="onSubmit()" class="diet-form">
+    <ion-card class="diet-card">
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Título da Dieta</ion-label>
+          <ion-input formControlName="title" placeholder="Ex: Dieta Hipocalórica"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="block" color="success" (click)="addMeal()">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Adicionar Refeição
+    </ion-button>
+
+    <div formArrayName="meals">
+      <ion-card class="meal-card" *ngFor="let meal of meals.controls; let i = index" [formGroupName]="i">
+        <ion-card-content>
+
+          <ion-item>
+            <ion-label position="floating">Título da Refeição</ion-label>
+            <ion-input formControlName="title" placeholder="Ex: Café da manhã"></ion-input>
+          </ion-item>
+
+          <ion-button fill="clear" color="danger" (click)="removeMeal(i)">
+            <ion-icon name="trash" slot="start"></ion-icon>
+            Remover Refeição
+          </ion-button>
+
+          <ion-button expand="block" color="success" (click)="addItem(i)">
+            <ion-icon name="add-circle" slot="start"></ion-icon>
+            Adicionar Alimento
+          </ion-button>
+
+          <div formArrayName="items">
+            <ion-card class="item-card" *ngFor="let item of getItems(i).controls; let j = index" [formGroupName]="j">
+              <ion-card-content>
+                <ion-item>
+                  <ion-input formControlName="name" placeholder="Nome do alimento"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="description" placeholder="Descrição (opcional)"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input type="number" formControlName="quantity" placeholder="Quantidade"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="unit" placeholder="Unidade (ex: g, ml, unid)"></ion-input>
+                </ion-item>
+
+                <ion-button fill="clear" color="danger" (click)="removeItem(i, j)">
+                  <ion-icon name="close-circle" slot="start"></ion-icon>
+                  Remover Alimento
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-button expand="block" color="success" type="submit" [disabled]="dietForm.invalid">
+      <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+      Finalizar Dieta
+    </ion-button>
+  </form>
+</ion-content>
+
+<app-navbar></app-navbar>

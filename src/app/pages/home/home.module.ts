@@ -7,8 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { MealAccordionComponent } from 'src/app/components/accordion/meal-accordion/meal-accordion.component';
 import { AccordionItemComponent } from 'src/app/components/accordion/accordion-item/accordion-item.component';
-
-import { SharedComponentModule } from 'src/app/shared/shared-component/shared-component.module';
+import { SharedComponentModule } from "src/app/shared/shared-component/shared-component.module";
 
 
 @NgModule({
@@ -18,7 +17,7 @@ import { SharedComponentModule } from 'src/app/shared/shared-component/shared-co
     IonicModule,
     HomePageRoutingModule,
     SharedComponentModule,
-  ],
+],
   declarations: [HomePage, MealAccordionComponent, AccordionItemComponent,]
 })
 export class HomePageModule { }

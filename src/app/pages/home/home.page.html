@@ -1,47 +1,62 @@
 <ion-content [fullscreen]="true">
+  <ion-toast
+    [isOpen]="showToast"
+    message="Dieta trocada com sucesso!"
+    duration="1000"
+    color="success"
+    position="top"
+    (didDismiss)="showToast = false">
+  </ion-toast>
+
   <ng-template [ngIf]="loading" [ngIfElse]="content">
     <app-spinning-loader />
   </ng-template>
 
   <ng-template #content>
-    <section id="header">
+    <ion-header class="custom-header">
       <ion-toolbar>
-        <ion-title size="large" slot="start">{{greeting}}, {{userNameFormatted}}</ion-title>
+        <div class="header-row">
+          <!-- Ícone de usuário -->
+          <ion-icon class="profile-icon" src="assets/icons/user-circle.svg"></ion-icon>
 
-        <div slot="end">
+          <!-- Saudação + nome -->
+          <div class="greeting-block">
+            <span class="greeting-text">{{greeting}},</span>
+            <span class="user-name">{{userNameFormatted}}</span>
+          </div>
+
+          <!-- Fogo com contagem -->
           <div id="days-in-offensive">
             <ion-icon src="assets/icons/offensive-days-fire.svg"></ion-icon>
-            <span>{{days_in_offensive}}</span>
+            <span>{{days_in_offensive}}</span> <!--test pra essa prr de foguinho-->
           </div>
-          <ion-icon class = "profile-icon" src="assets/icons/user-circle.svg" slot="end"></ion-icon>
         </div>
       </ion-toolbar>
-    </section>
+    </ion-header>
 
     <section>
-      <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Pesquise uma dieta por titulo ou id" show-clear-button="focus"></ion-searchbar>
+      <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Pesquise uma dieta por título ou ID" show-clear-button="focus"></ion-searchbar>
 
       <ion-list *ngIf="filteredList">
         <ion-item class="search-diet-item" *ngFor="let diet of filteredList">
           <ion-label>{{ diet.title }}</ion-label>
-          <ion-button class="confirm-button" (click)="handleSetDietToUser(diet.id)">    
-            <ion-icon src="assets/icons/download-simple.svg"></ion-icon>
-              Baixar
-            </ion-button>
+          <ion-button class="confirm-button" (click)="handleSetDietToUser(diet.id)">
+            <ion-icon src="assets/icons/to-change.svg"></ion-icon>
+            Trocar Dieta
+          </ion-button>
         </ion-item>
       </ion-list>
     </section>
 
     <section *ngIf="!hasDiet" class="wrapper">
-      <ion-title size="large" slot="start" class="title">Você ainda não segue nenhuma dieta.</ion-title>
+      <ion-title size="large" class="title">Você ainda não segue nenhuma dieta.</ion-title>
     </section>
 
-    <section id="diet" *ngIf="hasDiet">
-      <ion-title class="title">Refeições</ion-title>
+    <!-- isso que mostra a dieta -->
+    <app-meal-accordion></app-meal-accordion>
+ 
+ 
 
-      <app-meal-accordion></app-meal-accordion>
-
-    </section>
     <section id="orientations" *ngIf="orientations">
       <ion-title class="title">Orientações Nutricionais</ion-title>
       <ion-accordion-group class="orientation-accordion">
@@ -63,4 +78,5 @@
     </section>
   </ng-template>
 </ion-content>
+
 <app-navbar></app-navbar>

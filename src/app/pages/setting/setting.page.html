@@ -13,7 +13,6 @@
 
     <div class="settings-wrapper">
 
-      <ion-title class="title">Configurações</ion-title>
 
       <ion-item class="setting" color="transparent" lines="none">
         <ion-icon name="sunny-outline" slot="start" size="large"></ion-icon>
@@ -45,14 +44,18 @@
         </ion-button>
       </ion-item>
 
-      <p class="credits">Desenvolvido por: João Gabriel, Rodrigo Oliveira e Alice Lins</p>
+      <ion-item class="setting" color="transparent" lines="none">
+      <ion-icon name="information-circle-outline" slot="start" size="large"></ion-icon>
+      <p>Sobre</p>
+      <ion-button [routerLink]="['/about']" slot="end" fill="clear" size="large">
+        <ion-icon src='assets/icons/arrow-right.svg'></ion-icon>
+      </ion-button>
+      </ion-item>
 
+      <p class="credits">Desenvolvido por: Kennedy Felipe e Rodrigo Oliveira</p>
+      
     </div>
-
   </div>
-
-
-
 </ion-content>
 
 <app-navbar></app-navbar>
