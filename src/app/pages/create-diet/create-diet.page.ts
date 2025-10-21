@@ -94,24 +94,23 @@ async onSubmit(): Promise<void> {
   };
 
   try {
-    await this.dietService.createDiet(payload);
-    this.showToast = true;
+  await this.dietService.createDiet(payload);
+  this.showToast = true;
 
     // Aguarda o toast aparecer antes de redirecionar
     setTimeout(() => {
       this.router.navigate(['/home']);
     }, 2000);
-  } catch (error: any) {
-    const status = error?.status ?? error?.response?.status;
-    if (status === 401 || status === 403) {
-      alert('Sem permissão para criar dietas.');
-    } else if (status === 404) {
-      alert('Usuário não encontrado.');
-    } else {
-      console.error(error);
-      alert('Erro ao criar dieta.');
+    } catch (error: any) {  
+      const status = error?.status ?? error?.response?.status;
+      if (status === 401 || status === 403) {
+        alert('Sem permissão para criar dietas.');
+      } else if (status === 404) {
+        alert('Usuário não encontrado.');
+      } else {
+        console.error(error);
+        alert('Erro ao criar dieta.');
+      }
     }
   }
-}
-
 }

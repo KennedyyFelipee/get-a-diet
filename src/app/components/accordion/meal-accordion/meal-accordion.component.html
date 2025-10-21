@@ -1,3 +1,16 @@
-<ion-accordion-group *ngFor="let meal of meals" id="meal-group" [multiple]="true">
-  <app-accordion-item [meal]="meal"></app-accordion-item>
+<ion-toast
+  [isOpen]="showToast"
+  message="Refeição concluida com sucesso! 🔥"
+  duration="2000"
+  color="success"
+  position="top"
+  (didDismiss)="showToast = false">
+</ion-toast>
+
+<ion-accordion-group *ngIf="meals" id="meal-group" [multiple]="true">
+  <app-accordion-item
+    *ngFor="let meal of meals"
+    [meal]="meal"
+    (mealCompleted)="handleMealCompleted()">
+  </app-accordion-item>
 </ion-accordion-group>

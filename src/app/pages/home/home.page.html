@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ion-toast
     [isOpen]="showToast"
-    message="Dieta trocada com sucesso!"
+    message="Sucessoo!"
     duration="1000"
     color="success"
     position="top"
@@ -16,20 +16,22 @@
     <ion-header class="custom-header">
       <ion-toolbar>
         <div class="header-row">
-          <!-- Ícone de usuário -->
           <ion-icon class="profile-icon" src="assets/icons/user-circle.svg"></ion-icon>
 
-          <!-- Saudação + nome -->
           <div class="greeting-block">
             <span class="greeting-text">{{greeting}},</span>
             <span class="user-name">{{userNameFormatted}}</span>
           </div>
 
-          <!-- Fogo com contagem -->
           <div id="days-in-offensive">
             <ion-icon src="assets/icons/offensive-days-fire.svg"></ion-icon>
-            <span>{{days_in_offensive}}</span> <!--test pra essa prr de foguinho-->
+            <span>{{days_in_offensive}}</span>
           </div>
+
+         <!-- <ion-button class="download-btn" fill="clear" (click)="baixarPdf()">
+            <ion-icon name="download-outline"></ion-icon>
+         </ion-button>  -->
+
         </div>
       </ion-toolbar>
     </ion-header>
@@ -76,6 +78,14 @@
         </ion-accordion>
       </ion-accordion-group>
     </section>
+
+    <!-- Floating Download Button: fica acima da navbar, canto inferior direito -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab-download-wrapper">
+      <ion-fab-button class="fab-download" (click)="baixarPdf()" aria-label="Baixar dieta em PDF">
+        <ion-icon name="download-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
   </ng-template>
 </ion-content>
 

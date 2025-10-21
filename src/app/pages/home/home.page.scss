@@ -100,7 +100,56 @@
 }
 .title {
   font-weight: 700;
-  font-size: 16px; // reduzir o tamanho
-  text-align: center; // centralizar
-  padding: 0 1rem; // para evita corte lateral
+  font-size: 16px; 
+  text-align: center; 
+  padding: 0 1rem; 
+}
+
+.fab-download-wrapper {
+  bottom: 72px; 
+  right: 16px; 
+  z-index: 9999;
+}
+
+.fab-download {
+  --background: var(--dark-green);
+  --box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  border-radius: 12px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 22px;
+    color: var(--white);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    transition: transform 0.12s ease;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+
+@media (max-width: 420px) {
+  .fab-download-wrapper {
+    bottom: 64px; 
+    right: 12px;
+  }
+
+  .fab-download {
+    width: 52px;
+    height: 52px;
+
+    ion-icon {
+      font-size: 20px;
+    }
+  }
 }

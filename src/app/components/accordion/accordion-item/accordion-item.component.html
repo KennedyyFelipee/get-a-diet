@@ -4,6 +4,7 @@
     <ion-label>{{meal.title}}</ion-label>
     <ion-icon class="ion-accordion-toggle-icon" src="assets/icons/chevron-down.svg"></ion-icon>
   </ion-item>
+
   <div class="meal-content" *ngFor="let mealItem of meal.items" slot="content">
     <ion-item class="meal-item">
       <div class="quantity">
@@ -25,8 +26,6 @@
 
     <ng-template #notLoading>
       <ion-icon src="assets/icons/check.svg"></ion-icon>
-      {{meal.completed ? "Concluida" : "Marcar como concluida"}}
+      {{meal.completed ? "Concluída" : "Marcar como concluída"}}
     </ng-template>
   </ion-button>
-
-</ion-accordion>

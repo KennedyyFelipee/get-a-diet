@@ -6,6 +6,8 @@ import { Diet, User } from 'src/app/@types/index.';
 import { AuthService } from 'src/app/services/auth.service';
 import { DarkModeService } from 'src/app/services/dark-mode.service';
 
+import { PdfService } from 'src/app/services/pdf.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -29,7 +31,12 @@ export class HomePage implements OnInit {
   public filteredList: Diet[] | null = []
 
 
-  constructor(private authService: AuthService, private darkMode: DarkModeService, private router: Router, private cookies: CookieService) { }
+  constructor(
+    private authService: AuthService, 
+    private darkMode: DarkModeService, 
+    private router: Router, 
+    private cookies: CookieService, 
+    private pdfService: PdfService) { }
 
   generateGreeting() {
     const timeOfDay = new Date().getHours()
@@ -94,9 +101,6 @@ export class HomePage implements OnInit {
         this.userNameFormatted = this.user.name.split(" ")[0];
         this.days_in_offensive = this.user.days_in_offensive;
 
-          // Correção rápida: log para verificar se o valor está vindo
-          console.log('Dias em ofensiva: ', this.days_in_offensive);
-
         if (this.user.diet) {
           this.hasDiet = true
           this.orientations = this.user.diet.orientations
@@ -139,6 +143,37 @@ export class HomePage implements OnInit {
       this.loading = false;
     } else {
       this.router.navigateByUrl('/login');
+    }
+  }
+
+  // metodo para recarregar os dados apos trocar uma dieta
+  async handleMealCompleted() {
+    this.showToast = true;
+
+    setTimeout(async () => {
+      await this.loadData(); 
+    }, 1000);
+  }
+
+  // metodo para baixar o pdf da dieta
+  async baixarPdf(): Promise<void> {
+    try {
+      if (!this.user) {
+        console.warn('Usuário não carregado');
+        this.showToast = true; // toast de sucesso
+        return;
+      }
+      if (!this.user.diet) {
+        console.warn('Usuário não tem dieta ativa');
+        this.showToast = true;
+        return;
+      }
+
+      await this.pdfService.generateDietPdf(this.user);
+      // toast simples de sucesso
+      this.showToast = true;
+    } catch (err) {
+      console.error('Erro ao gerar PDF:', err);
     }
   }
 }
