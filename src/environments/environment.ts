@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:3333'
+  API_URL: 'https://api-get-a-diet-production.up.railway.app'
 };
 
 /*

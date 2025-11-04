@@ -124,3 +124,17 @@ form {
     --color: #FFF;
     --background: var(--light-green)
   }
+  
+  .change-password-button {
+    align-self: center;
+    height: 3rem;
+    width: 60%;
+    margin-top: 1rem;
+    font-weight: bold;
+    --border-radius: 16px;
+    --color: #FFF;
+    --background: #779E39; /* verde igual ao estilo dos inputs */
+    ion-icon {
+      margin-right: 0.5rem;
+    }
+  } 
