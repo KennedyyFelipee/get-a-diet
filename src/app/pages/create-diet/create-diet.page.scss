@@ -1,79 +1,187 @@
-ion-content {
-  --background: #f4f4f4;
-  padding: 1rem;
+/* background */
+ion-content.background {
+  --background: url(../../../assets/svg/bg-login-light.svg) 100% 100% no-repeat;
+  background-size: cover;
 }
 
+/* shell */
+.page-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  min-height: calc(100vh - 56px);
+}
+
+/* HEADER — fora do card, alinhado em cima */
+.page-header {
+  width: 100%;
+  max-width: 720px;
+  text-align: center;
+  margin-bottom: 0.6rem;
+  padding: 0 12px;
+}
+
+/* grande e legível */
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0b3d2e; /* tom fit */
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* subtítulo — estilo destaque clean, por cima do card */
+.page-subtitle {
+  margin: 6px auto 0 auto;
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(90deg, #3bb273, #2e8b57);
+  padding: 6px 12px;
+  border-radius: 999px;
+  -webkit-text-fill-color: white; /* garante legibilidade */
+  box-shadow: 0 6px 18px rgba(46,139,87,0.12);
+}
+
+/* card wrapper */
+.card-wrapper {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  justify-content: center;
+}
+
+/* card (visual limpo, branco) */
+.page-card {
+  width: 100%;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 10px 28px rgba(18,38,84,0.06);
+  background: #ffffff;
+}
+
+/* espaço interno do form */
 .diet-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
 }
 
-.diet-card,
-.meal-card,
+/* destaque leve para o campo título (primeiro card interno) */
+.diet-card {
+  background: #fbfdff;
+  border-radius: 10px;
+  padding: 6px;
+  border: 1px solid rgba(15,66,130,0.04);
+  box-shadow: 0 6px 18px rgba(18,38,84,0.04);
+}
+
+/* meal / item cards */
+.meal-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px;
+  border: 1px solid rgba(15,66,130,0.04);
+  margin-top: 6px;
+  box-shadow: 0 6px 14px rgba(18,38,84,0.03);
+}
+
 .item-card {
-  background: #0b3d2e;
-  color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
-  ion-card-title {
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-  }
-
-  ion-card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  ion-item {
-    --background: transparent;
-    --color: #fff;
-  }
-
-  ion-input {
-    color: #fff;
-  }
-
-  ion-label {
-    color: #ccc;
-  }
-
-  ion-button {
-    font-size: 0.85rem;
-    --border-radius: 8px;
-  }
+  background: #fbfdff;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 8px;
+  border: 1px solid rgba(15,66,130,0.03);
 }
 
-ion-button[color='success'] {
-  --background: #2e8b57;
-  --background-hover: #26724a;
-  --background-activated: #1f5c3c;
-  --color: #fff;
-  font-weight: 500;
-}
-
-ion-button[color='danger'] {
-  --background: #ff4d4f;
-  --color: #fff;
-  font-weight: 500;
-}
-
-app-navbar {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
+/* inputs */
 ion-item {
-  margin-bottom: 8px;
+  --background: transparent;
+  --inner-padding-end: 0.6rem;
+  --inner-padding-start: 0.6rem;
+  --border-radius: 8px;
+  width: 100%;
+  margin: 6px 0;
+  background: #fff;
+  border: 1px solid rgba(15,66,130,0.04);
+  padding-left: 8px;
 }
-.page-title {
-  font-size: 28px;
+
+ion-label {
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+ion-input {
+  font-size: 0.96rem;
+  color: #0f172a;
+}
+
+/* actions layout */
+.meal-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.two-cols {
+  display: flex;
+  gap: 8px;
+}
+
+.two-cols ion-item {
+  flex: 1;
+}
+
+/* BOTÕES — visual coerente com login/alter-password */
+.submit-button {
+  align-self: center;
+  height: 48px;
+  width: 60%;
+  margin-top: 10px;
   font-weight: 700;
-  margin: 0 auto;
-  text-align: center;
-  color: #2e8b57; // verde sucesso
+  --border-radius: 12px;
+  color: #fff;
+  --background: linear-gradient(180deg, #2f80ed, #2567d6);
+  box-shadow: 0 10px 22px rgba(47,128,237,0.18);
+}
+
+.outline-button {
+  align-self: stretch;
+  --background: transparent;
+  --color: #0f482f;
+  border: 1px solid rgba(47,128,237,0.12);
+  --border-radius: 12px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.small-success {
+  --background: #2e8b57;
+  --color: #fff;
+  --border-radius: 10px;
+  height: 40px;
+}
+
+.danger-text {
+  --color: #ff4d4f;
+  font-weight: 600;
+}
+
+/* small tweaks */
+ion-button ion-icon { margin-right: 0.45rem; }
+
+/* responsive */
+@media (max-width: 520px) {
+  .page-title { font-size: 1.4rem; }
+  .page-subtitle { font-size: 0.85rem; padding: 5px 10px; }
+  .page-card { padding: 14px; }
+  .submit-button, .outline-button { width: 90%; }
+  .two-cols { flex-direction: column; }
 }
